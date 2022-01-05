@@ -14,6 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late MainCubit _mainCubit;
   late MainCubitHelper _mainCubitHelper;
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -30,14 +31,34 @@ class _MainScreenState extends State<MainScreen> {
       child: BlocBuilder(
         bloc: _mainCubit,
         builder: (BuildContext context, MainState state) {
-          return SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-
-                _mainCubitHelper.mainWidget(state),
+          return Scaffold(
+            appBar: AppBar(
+              title: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'jdvojnco',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              backgroundColor: Colors.white,
+            ),
+            body: _mainCubitHelper.mainWidget(state),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: selectedIndex,
+              items: const [
+                BottomNavigationBarItem(
+                    label: 'Today', icon: Icon(Icons.wb_sunny_outlined)),
+                BottomNavigationBarItem(
+                    label: 'Forecast', icon: Icon(Icons.cloud)),
               ],
+              onTap: (int index) {
+                setState(() {
+                  selectedIndex = index;
+                  selectedIndex == 0
+                      ? _mainCubit.toCurrentWeatherScreen()
+                      : _mainCubit.toForecastScreen();
+                });
+              },
             ),
           );
         },

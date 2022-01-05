@@ -10,6 +10,6 @@ class CurrentWeatherScreen extends StatefulWidget {
 class _CurrentWeatherScreenState extends State<CurrentWeatherScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text('puk', style: TextStyle(color: Colors.red),));
   }
 }

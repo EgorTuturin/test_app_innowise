@@ -10,6 +10,6 @@ class ForecastScreen extends StatefulWidget {
 class _ForecastScreenState extends State<ForecastScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text('wvnksdlcmsk', style: TextStyle(color: Colors.red),));
   }
 }
