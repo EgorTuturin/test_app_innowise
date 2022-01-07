@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter_bloc: ^8.0.1
   dio: ^4.0.4
+  geolocator: ^8.0.1
+  geocoding: ^2.0.1
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2

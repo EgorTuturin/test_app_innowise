@@ -7,16 +7,12 @@ class MainCubitHelper {
   Widget mainWidget(MainState state) {
     switch (state.toString()) {
       case 'ForecastState':
-        return const Center(
-          child: ForecastScreen(),
-        );
+        return ForecastScreen();
       case 'CurrentWeatherState':
-        return const Center(
-          child: CurrentWeatherScreen(),
-        );
+        return CurrentWeatherScreen();
       default:
         return const Center(
-          child: CurrentWeatherScreen(),
+          child: CircularProgressIndicator(),
         );
     }
   }
