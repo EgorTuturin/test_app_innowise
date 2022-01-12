@@ -6,7 +6,7 @@ import 'package:test_app_innowise/src/repository.dart';
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(InitialState());
 
-  CurrentWeatherModel currentWeather = CurrentWeatherModel();
+  CurrentWeatherModel? currentWeather;
 
   Future<void> getData(String city) async {
     currentWeather = await DataRepository().getCurrentWeather(city);

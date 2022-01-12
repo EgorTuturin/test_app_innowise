@@ -7,17 +7,17 @@ class DataRepository {
 
   Future<CurrentWeatherModel> getCurrentWeather(String city) async {
     CurrentWeatherModel currentWeather = CurrentWeatherModel();
-    await request.get(
-        'https://api.openweathermap.org/data/2.5/weather',
-        queryParameters: {'q': city, 'units': 'metric', 'appid': apiKey}).then((value) {
+    await request.get('https://api.openweathermap.org/data/2.5/forecast',
+        queryParameters: {
+          'q': city,
+          'units': 'metric',
+          'appid': apiKey
+        }).then((value) {
       if (value.statusCode == 200) {
         print(value);
-        CurrentWeatherModel  currentWeather =
-        CurrentWeatherModel.fromJson(value.data);
-        return currentWeather;
+        currentWeather = CurrentWeatherModel.fromJson(value.data);
       }
     }).catchError((e) {
-      print('getCurrentWeather request failed');
       print(e);
     });
     return currentWeather;
