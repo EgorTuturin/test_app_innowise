@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share/share.dart';
 import 'package:test_app_innowise/src/bloc/main_cubit.dart';
 import 'package:test_app_innowise/src/ui/widgets/weather_icons.dart';
+import 'package:test_app_innowise/src/ui/widgets/weather_parameter_icon.dart';
 
 class CurrentWeatherScreen extends StatefulWidget {
   String city;
@@ -26,13 +28,9 @@ class _CurrentWeatherScreenState extends State<CurrentWeatherScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Icon(
-          Icons.wb_sunny_outlined,
-          color: Colors.amber,
-          size: 100,
-        ),
-        Text(
-            '${_mainCubit.currentWeather!.list?.first.main?.temp?.toStringAsFixed(0)} C '
+        WeatherParameterIcon(_mainCubit.currentWeather!.list!.first.weather!.first.main!, 100, 100),
+        Text(widget.city),
+        Text('${_mainCubit.currentWeather!.list?.first.main?.temp?.toStringAsFixed(0)} C '
             '| ${_mainCubit.currentWeather?.list?.first.weather?.first.main}'),
         const Divider(),
         Row(
@@ -53,10 +51,13 @@ class _CurrentWeatherScreenState extends State<CurrentWeatherScreen> {
         ),
         const Divider(),
         InkWell(
-            onTap: () {},
-            child: const Text('Share',
-                style:
-                    TextStyle(color: Colors.deepOrangeAccent, fontSize: 20))),
+          onTap: () async {
+            await Share.share(
+                '${widget.city}, ${_mainCubit.currentWeather!.list?.first.main?.temp?.toStringAsFixed(0)} C,'
+                ' ${_mainCubit.currentWeather?.list?.first.weather?.first.main}');
+          },
+          child: const Text('Share', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 20)),
+        ),
       ],
     );
   }
