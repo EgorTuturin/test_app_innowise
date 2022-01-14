@@ -73,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: Colors.white,
           ),
           body: Center(
-            child: _currentAddress != null
+            child: _currentAddress != null && _mainCubit.currentWeather != null
                 ? _mainCubitHelper.mainWidget(state, _currentAddress!)
                 : const Center(child: Text('Geoposition not found')),
           ),

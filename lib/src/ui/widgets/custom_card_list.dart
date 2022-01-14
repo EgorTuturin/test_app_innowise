@@ -16,16 +16,23 @@ class _CustomCardListState extends State<CustomCardList> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(list.length, (i) => _buildRow(list[i])),
+      children: List.generate(
+          list.length,
+          (i) => i != list.length - 1
+              ? DateTime.parse(list[i].dtTxt).weekday == DateTime.parse(list[i + 1].dtTxt).weekday
+                  ? _buildRow(list[i])
+                  : Text('${DateTime.parse(list[i].dtTxt).weekday}')
+              : Text('end')),
     );
   }
 
   Widget _buildRow(var element) {
+    DateTime time = DateTime.parse(element.dtTxt);
     final makeListTile = ListTile(
       leading: WeatherParameterIcon(element.weather.first.main, 30, 30),
       title: Column(
         children: [
-          Text(element.dtTxt),
+          Text('${time.hour.toString().padLeft(2,'0')}:${time.minute.toString().padLeft(2,'0')}'),
           Text(element.weather.first.description),
         ],
       ),

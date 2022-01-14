@@ -75,6 +75,6 @@ class Wind {
   Wind({this.speed});
 
   Wind.fromJson(Map<String, dynamic> json) {
-    speed = json['speed'];
+    speed = json['speed'].toDouble();
   }
 }
